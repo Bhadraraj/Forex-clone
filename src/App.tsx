@@ -9,6 +9,7 @@ import TransactionHistory from './components/pages/TransactionHistory';
 import OpenNewAccount from './components/pages/OpenNewAccount';
 import AccountList from './components/pages/AccountList';
 import TradingContest from './components/pages/TradingContest';
+import AnimatedBackground from './components/AnimatedBackground';
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -46,8 +47,9 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      <div className="flex">
+    <div className="min-h-screen bg-gray-900 relative overflow-hidden">
+      <AnimatedBackground />
+      <div className="flex relative z-10">
         {/* Sidebar */}
         <Sidebar 
           isOpen={sidebarOpen} 
