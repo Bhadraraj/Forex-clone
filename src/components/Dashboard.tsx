@@ -10,7 +10,8 @@ import {
   CreditCard,
   MoreHorizontal,
   Eye,
-  Activity
+  Activity,
+  ChevronDown
 } from 'lucide-react';
 
 interface StatCard {
@@ -54,7 +55,7 @@ const Dashboard: React.FC = () => {
       value: '$0.00',
       icon: CreditCard,
       color: 'blue',
-      bgColor: 'bg-white/10',
+      bgColor: 'bg-blue-50/80',
       borderColor: 'border-t-blue-500'
     },
     {
@@ -62,7 +63,7 @@ const Dashboard: React.FC = () => {
       value: '$0.00',
       icon: TrendingUp,
       color: 'green',
-      bgColor: 'bg-white/10',
+      bgColor: 'bg-green-50/80',
       borderColor: 'border-t-green-500'
     },
     {
@@ -70,7 +71,7 @@ const Dashboard: React.FC = () => {
       value: '$0.00',
       icon: TrendingDown,
       color: 'red',
-      bgColor: 'bg-white/10',
+      bgColor: 'bg-red-50/80',
       borderColor: 'border-t-red-500'
     },
     {
@@ -79,7 +80,7 @@ const Dashboard: React.FC = () => {
       subtitle: 'Active',
       icon: BarChart3,
       color: 'purple',
-      bgColor: 'bg-white/10',
+      bgColor: 'bg-purple-50/80',
       borderColor: 'border-t-purple-500'
     }
   ];
@@ -92,10 +93,10 @@ const Dashboard: React.FC = () => {
   ];
 
   const todayPerformance: TodayPerformanceItem[] = [
-    { title: 'Deposits', value: '$0', color: 'text-green-400' },
-    { title: 'Withdrawals', value: '$0', color: 'text-red-400' },
-    { title: 'Transactions', value: '0', color: 'text-blue-400' },
-    { title: 'Net Flow', value: '$0', color: 'text-green-400' }
+    { title: 'Deposits', value: '$0', color: 'text-green-600' },
+    { title: 'Withdrawals', value: '$0', color: 'text-red-600' },
+    { title: 'Transactions', value: '0', color: 'text-blue-600' },
+    { title: 'Net Flow', value: '$0', color: 'text-green-600' }
   ];
 
   const accounts: Account[] = [
@@ -124,14 +125,14 @@ const Dashboard: React.FC = () => {
       {/* Dashboard Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
         <div>
-          <h1 className="text-3xl font-bold text-white mb-2">Dashboard</h1>
-          <p className="text-gray-300 flex items-center">
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">Dashboard</h1>
+          <p className="text-gray-600 flex items-center">
             <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
             Welcome back! Here's your trading overview.
           </p>
         </div>
         <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-          <div className="text-sm text-gray-400">
+          <div className="text-sm text-gray-500">
             <p>Last updated: 1:14:41 AM</p>
             <p>Next refresh in: 3s</p>
           </div>
@@ -153,15 +154,15 @@ const Dashboard: React.FC = () => {
         {statCards.map((card, index) => {
           const Icon = card.icon;
           return (
-            <div key={index} className={`${card.bgColor} backdrop-blur-md rounded-xl p-6 border-t-4 ${card.borderColor} shadow-lg border border-white/20 hover:bg-white/20 transition-all duration-200`}>
+            <div key={index} className={`${card.bgColor} backdrop-blur-md rounded-xl p-6 border-t-4 ${card.borderColor} shadow-lg border border-white/50 hover:shadow-xl transition-all duration-200`}>
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-medium text-gray-300">{card.title}</h3>
-                <Icon size={20} className={`text-${card.color}-400`} />
+                <h3 className="text-sm font-medium text-gray-600">{card.title}</h3>
+                <Icon size={20} className={`text-${card.color}-500`} />
               </div>
               <div>
-                <p className={`text-2xl font-bold text-white mb-1`}>{card.value}</p>
+                <p className={`text-2xl font-bold text-gray-800 mb-1`}>{card.value}</p>
                 {card.subtitle && (
-                  <p className="text-sm text-gray-400">{card.subtitle}</p>
+                  <p className="text-sm text-gray-500">{card.subtitle}</p>
                 )}
               </div>
             </div>
@@ -170,22 +171,22 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Daily Performance Trends */}
-      <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-lg p-6 border border-white/20">
+      <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-lg p-6 border border-white/50">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 space-y-4 lg:space-y-0">
           <div className="flex items-center space-x-2">
-            <BarChart3 size={20} className="text-blue-400" />
+            <BarChart3 size={20} className="text-blue-500" />
             <div>
-              <h2 className="text-lg font-semibold text-white">Daily Performance Trends</h2>
-              <p className="text-sm text-gray-400">Last 30 days activity overview</p>
+              <h2 className="text-lg font-semibold text-gray-800">Daily Performance Trends</h2>
+              <p className="text-sm text-gray-500">Last 30 days activity overview</p>
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <button className="bg-blue-500/20 text-blue-400 border border-blue-500/30 px-3 py-1 rounded-full text-sm backdrop-blur-sm">All</button>
-            <button className="text-gray-400 hover:bg-white/10 px-3 py-1 rounded-full text-sm transition-colors">Financial</button>
-            <button className="bg-blue-500/20 text-blue-400 border border-blue-500/30 px-3 py-1 rounded-full text-sm backdrop-blur-sm">Line</button>
-            <button className="text-gray-400 hover:bg-white/10 px-3 py-1 rounded-full text-sm transition-colors">Area</button>
-            <button className="text-gray-400 hover:bg-white/10 px-3 py-1 rounded-full text-sm transition-colors">Mixed</button>
-            <select className="text-gray-300 bg-white/10 border border-white/20 rounded-lg px-3 py-1 text-sm backdrop-blur-sm">
+            <button className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">All</button>
+            <button className="text-gray-600 hover:bg-gray-100 px-3 py-1 rounded-full text-sm transition-colors">Financial</button>
+            <button className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">Line</button>
+            <button className="text-gray-600 hover:bg-gray-100 px-3 py-1 rounded-full text-sm transition-colors">Area</button>
+            <button className="text-gray-600 hover:bg-gray-100 px-3 py-1 rounded-full text-sm transition-colors">Mixed</button>
+            <select className="text-gray-600 bg-white/80 border border-gray-200 rounded-lg px-3 py-1 text-sm">
               <option>30 Days</option>
               <option>7 Days</option>
               <option>1 Day</option>
@@ -209,39 +210,39 @@ const Dashboard: React.FC = () => {
             };
             
             return (
-              <div key={index} className={`bg-white/5 backdrop-blur-sm rounded-lg p-4 border-l-4 ${borderColors[metric.color as keyof typeof borderColors]} border border-white/10`}>
+              <div key={index} className={`bg-white/60 backdrop-blur-sm rounded-lg p-4 border-l-4 ${borderColors[metric.color as keyof typeof borderColors]} border border-white/30`}>
                 <div className="flex items-center justify-between mb-2">
-                  <Icon size={16} className={`text-${metric.color}-400`} />
-                  <span className={`text-xs text-${metric.color}-400 font-medium`}>{metric.change}</span>
+                  <Icon size={16} className={`text-${metric.color}-500`} />
+                  <span className={`text-xs text-${metric.color}-600 font-medium`}>{metric.change}</span>
                 </div>
-                <h4 className="text-sm font-medium text-gray-300 mb-1">{metric.title}</h4>
-                <p className="text-lg font-bold text-white">{metric.value}</p>
+                <h4 className="text-sm font-medium text-gray-600 mb-1">{metric.title}</h4>
+                <p className="text-lg font-bold text-gray-800">{metric.value}</p>
               </div>
             );
           })}
         </div>
 
         {/* Chart Area */}
-        <div className="h-64 bg-white/5 backdrop-blur-sm rounded-lg flex items-center justify-center border-2 border-dashed border-white/20">
+        <div className="h-64 bg-white/60 backdrop-blur-sm rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
           <div className="text-center">
             <Activity size={48} className="mx-auto text-gray-400 mb-2" />
-            <p className="text-gray-400">Chart visualization area</p>
-            <p className="text-sm text-gray-500">Performance data will be displayed here</p>
+            <p className="text-gray-500">Chart visualization area</p>
+            <p className="text-sm text-gray-400">Performance data will be displayed here</p>
           </div>
         </div>
       </div>
 
       {/* Today's Performance */}
-      <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-lg p-6 border border-white/20">
+      <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-lg p-6 border border-white/50">
         <div className="flex items-center space-x-2 mb-4">
-          <TrendingUp size={20} className="text-green-400" />
-          <h2 className="text-lg font-semibold text-white">Today's Performance</h2>
+          <TrendingUp size={20} className="text-green-500" />
+          <h2 className="text-lg font-semibold text-gray-800">Today's Performance</h2>
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {todayPerformance.map((item, index) => (
             <div key={index} className="text-center">
               <p className={`text-2xl font-bold ${item.color} mb-1`}>{item.value}</p>
-              <p className="text-sm text-gray-400">{item.title}</p>
+              <p className="text-sm text-gray-500">{item.title}</p>
             </div>
           ))}
         </div>
@@ -250,68 +251,68 @@ const Dashboard: React.FC = () => {
       {/* Bottom Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Transactions */}
-        <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-lg p-6 border border-white/20">
+        <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-lg p-6 border border-white/50">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                <ArrowUpDown size={16} className="text-purple-400" />
+              <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                <ArrowUpDown size={16} className="text-purple-600" />
               </div>
               <div>
-                <h2 className="text-lg font-semibold text-white">Recent Transactions</h2>
-                <p className="text-sm text-gray-400">Latest activity on your accounts</p>
+                <h2 className="text-lg font-semibold text-gray-800">Recent Transactions</h2>
+                <p className="text-sm text-gray-500">Latest activity on your accounts</p>
               </div>
             </div>
             <RefreshCw size={16} className="text-gray-400" />
           </div>
           
           <div className="flex space-x-2 mb-4">
-            <button className="bg-blue-500/20 text-blue-400 border border-blue-500/30 px-3 py-1 rounded-full text-sm backdrop-blur-sm">All (0)</button>
-            <button className="text-gray-400 hover:bg-white/10 px-3 py-1 rounded-full text-sm transition-colors">Deposit</button>
-            <button className="text-gray-400 hover:bg-white/10 px-3 py-1 rounded-full text-sm transition-colors">Withdrawal</button>
-            <button className="text-gray-400 hover:bg-white/10 px-3 py-1 rounded-full text-sm transition-colors">Transfer</button>
+            <button className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">All (0)</button>
+            <button className="text-gray-600 hover:bg-gray-100 px-3 py-1 rounded-full text-sm transition-colors">Deposit</button>
+            <button className="text-gray-600 hover:bg-gray-100 px-3 py-1 rounded-full text-sm transition-colors">Withdrawal</button>
+            <button className="text-gray-600 hover:bg-gray-100 px-3 py-1 rounded-full text-sm transition-colors">Transfer</button>
           </div>
 
           <div className="flex flex-col items-center justify-center py-12">
-            <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-4">
+            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
               <ArrowUpDown size={24} className="text-gray-400" />
             </div>
-            <p className="text-gray-400">No transactions found</p>
+            <p className="text-gray-500">No transactions found</p>
           </div>
         </div>
 
         {/* Active Accounts */}
-        <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-lg p-6 border border-white/20">
+        <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-lg p-6 border border-white/50">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                <Users size={16} className="text-blue-400" />
+              <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                <Users size={16} className="text-blue-600" />
               </div>
               <div>
-                <h2 className="text-lg font-semibold text-white">Active Accounts</h2>
-                <p className="text-sm text-gray-400">2 accounts connected</p>
+                <h2 className="text-lg font-semibold text-gray-800">Active Accounts</h2>
+                <p className="text-sm text-gray-500">2 accounts connected</p>
               </div>
             </div>
             <RefreshCw size={16} className="text-gray-400" />
           </div>
 
-          <p className="text-sm text-gray-400 mb-4">
-            <span className="font-medium text-gray-300">Server Name:</span> Fxco Liquidity Corp
+          <p className="text-sm text-gray-500 mb-4">
+            <span className="font-medium text-gray-600">Server Name:</span> Fxco Liquidity Corp
           </p>
 
           <div className="space-y-4">
             {accounts.map((account, index) => (
-              <div key={index} className="border border-white/20 rounded-lg p-4 bg-white/5 backdrop-blur-sm">
+              <div key={index} className="border border-gray-200/50 rounded-lg p-4 bg-white/60 backdrop-blur-sm">
                 <div className="flex items-center justify-between mb-3">
                   <div>
-                    <h3 className="font-medium text-white">{account.name}</h3>
-                    <p className="text-sm text-gray-400">{account.id}</p>
+                    <h3 className="font-medium text-gray-800">{account.name}</h3>
+                    <p className="text-sm text-gray-500">{account.id}</p>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <span className="px-2 py-1 bg-white/10 text-gray-300 text-xs rounded border border-white/20">{account.type}</span>
-                    <button className="p-1 text-gray-400 hover:text-white transition-colors">
+                    <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded border border-gray-200">{account.type}</span>
+                    <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
                       <Eye size={16} />
                     </button>
-                    <button className="p-1 text-gray-400 hover:text-white transition-colors">
+                    <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
                       <MoreHorizontal size={16} />
                     </button>
                   </div>
@@ -319,20 +320,20 @@ const Dashboard: React.FC = () => {
                 
                 <div className="grid grid-cols-4 gap-4 text-sm">
                   <div>
-                    <p className="text-gray-400">Balance</p>
-                    <p className="font-medium text-white">{account.balance}</p>
+                    <p className="text-gray-500">Balance</p>
+                    <p className="font-medium text-gray-800">{account.balance}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400">Equity</p>
-                    <p className="font-medium text-white">{account.equity}</p>
+                    <p className="text-gray-500">Equity</p>
+                    <p className="font-medium text-gray-800">{account.equity}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400">P&L</p>
-                    <p className="font-medium text-green-400">{account.pnl}</p>
+                    <p className="text-gray-500">P&L</p>
+                    <p className="font-medium text-green-600">{account.pnl}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400">Leverage</p>
-                    <p className="font-medium text-white">{account.leverage}</p>
+                    <p className="text-gray-500">Leverage</p>
+                    <p className="font-medium text-gray-800">{account.leverage}</p>
                   </div>
                 </div>
               </div>

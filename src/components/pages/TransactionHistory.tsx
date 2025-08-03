@@ -11,13 +11,25 @@ import {
   Calendar
 } from 'lucide-react';
 
-const TransactionHistory = () => {
+interface Transaction {
+  id: string;
+  type: 'deposit' | 'withdrawal' | 'transfer';
+  amount: number;
+  status: 'completed' | 'pending' | 'failed' | 'cancelled';
+  date: string;
+  time: string;
+  method: string;
+  account: string;
+  reference: string;
+}
+
+const TransactionHistory: React.FC = () => {
   const [filterType, setFilterType] = useState('all');
   const [dateRange, setDateRange] = useState('30');
   const [searchTerm, setSearchTerm] = useState('');
 
   // Mock transaction data
-  const transactions = [
+  const transactions: Transaction[] = [
     {
       id: 'TXN001',
       type: 'deposit',
@@ -53,7 +65,7 @@ const TransactionHistory = () => {
     }
   ];
 
-  const getTransactionIcon = (type) => {
+  const getTransactionIcon = (type: string) => {
     switch (type) {
       case 'deposit':
         return <ArrowDownToLine size={16} className="text-green-600" />;
@@ -66,7 +78,7 @@ const TransactionHistory = () => {
     }
   };
 
-  const getStatusBadge = (status) => {
+  const getStatusBadge = (status: string) => {
     const statusStyles = {
       completed: 'bg-green-100 text-green-800',
       pending: 'bg-yellow-100 text-yellow-800',
@@ -75,7 +87,7 @@ const TransactionHistory = () => {
     };
 
     return (
-      <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusStyles[status]}`}>
+      <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusStyles[status as keyof typeof statusStyles]}`}>
         {status.charAt(0).toUpperCase() + status.slice(1)}
       </span>
     );
@@ -96,7 +108,7 @@ const TransactionHistory = () => {
             <Clock size={20} className="text-purple-600" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Transaction History</h1>
+            <h1 className="text-3xl font-bold text-gray-800">Transaction History</h1>
             <p className="text-gray-600">View all your account transactions</p>
           </div>
         </div>
@@ -107,7 +119,7 @@ const TransactionHistory = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl shadow-sm p-6">
+      <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
           <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
             {/* Transaction Type Filter */}
@@ -116,7 +128,7 @@ const TransactionHistory = () => {
               <select 
                 value={filterType}
                 onChange={(e) => setFilterType(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80"
               >
                 <option value="all">All Transactions</option>
                 <option value="deposit">Deposits</option>
@@ -131,7 +143,7 @@ const TransactionHistory = () => {
               <select 
                 value={dateRange}
                 onChange={(e) => setDateRange(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80"
               >
                 <option value="7">Last 7 days</option>
                 <option value="30">Last 30 days</option>
@@ -149,7 +161,7 @@ const TransactionHistory = () => {
               placeholder="Search by reference..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80"
             />
           </div>
         </div>
@@ -157,7 +169,7 @@ const TransactionHistory = () => {
 
       {/* Transaction Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-medium text-gray-600">Total Deposits</h3>
             <ArrowDownToLine size={16} className="text-green-600" />
@@ -166,7 +178,7 @@ const TransactionHistory = () => {
           <p className="text-xs text-gray-500">1 transaction</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-medium text-gray-600">Total Withdrawals</h3>
             <ArrowUpFromLine size={16} className="text-red-600" />
@@ -175,7 +187,7 @@ const TransactionHistory = () => {
           <p className="text-xs text-gray-500">1 transaction</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-medium text-gray-600">Total Transfers</h3>
             <ArrowLeftRight size={16} className="text-blue-600" />
@@ -184,20 +196,20 @@ const TransactionHistory = () => {
           <p className="text-xs text-gray-500">1 transaction</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-medium text-gray-600">Net Flow</h3>
             <ArrowUpDown size={16} className="text-gray-600" />
           </div>
-          <p className="text-2xl font-bold text-gray-900">$750.00</p>
+          <p className="text-2xl font-bold text-gray-800">$750.00</p>
           <p className="text-xs text-gray-500">3 transactions</p>
         </div>
       </div>
 
       {/* Transactions Table */}
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm overflow-hidden border border-white/50">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">
+          <h2 className="text-lg font-semibold text-gray-800">
             Recent Transactions ({filteredTransactions.length})
           </h2>
         </div>
@@ -205,7 +217,7 @@ const TransactionHistory = () => {
         {filteredTransactions.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50">
+              <thead className="bg-gray-50/80">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Transaction
@@ -230,20 +242,20 @@ const TransactionHistory = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-white/60 divide-y divide-gray-200">
                 {filteredTransactions.map((transaction) => (
-                  <tr key={transaction.id} className="hover:bg-gray-50">
+                  <tr key={transaction.id} className="hover:bg-gray-50/50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center space-x-3">
                         {getTransactionIcon(transaction.type)}
                         <div>
-                          <p className="text-sm font-medium text-gray-900">{transaction.reference}</p>
+                          <p className="text-sm font-medium text-gray-800">{transaction.reference}</p>
                           <p className="text-xs text-gray-500">{transaction.id}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-sm text-gray-900 capitalize">{transaction.type}</span>
+                      <span className="text-sm text-gray-800 capitalize">{transaction.type}</span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`text-sm font-medium ${
@@ -258,13 +270,13 @@ const TransactionHistory = () => {
                       {getStatusBadge(transaction.status)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{transaction.date}</div>
+                      <div className="text-sm text-gray-800">{transaction.date}</div>
                       <div className="text-xs text-gray-500">{transaction.time}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                       {transaction.method}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                       {transaction.account}
                     </td>
                   </tr>
@@ -275,7 +287,7 @@ const TransactionHistory = () => {
         ) : (
           <div className="text-center py-12">
             <Clock size={48} className="mx-auto text-gray-400 mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No transactions found</h3>
+            <h3 className="text-lg font-medium text-gray-800 mb-2">No transactions found</h3>
             <p className="text-gray-500">Try adjusting your filters or date range</p>
           </div>
         )}

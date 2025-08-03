@@ -4,14 +4,13 @@ import {
   CreditCard, 
   Building2, 
   Smartphone, 
-  Globe, 
   Shield, 
   Clock,
   AlertTriangle,
   Info
 } from 'lucide-react';
 
-const Withdrawal = () => {
+const Withdrawal: React.FC = () => {
   const [selectedMethod, setSelectedMethod] = useState('card');
   const [amount, setAmount] = useState('');
 
@@ -57,7 +56,7 @@ const Withdrawal = () => {
             <ArrowUpFromLine size={20} className="text-red-600" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Withdraw Funds</h1>
+            <h1 className="text-3xl font-bold text-gray-800">Withdraw Funds</h1>
             <p className="text-gray-600">Withdraw money from your trading account</p>
           </div>
         </div>
@@ -68,7 +67,7 @@ const Withdrawal = () => {
       </div>
 
       {/* Warning Banner */}
-      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+      <div className="bg-yellow-50/80 backdrop-blur-md border border-yellow-200 rounded-lg p-4">
         <div className="flex items-center space-x-2">
           <AlertTriangle size={20} className="text-yellow-600" />
           <div>
@@ -84,8 +83,8 @@ const Withdrawal = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Withdrawal Methods */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Select Withdrawal Method</h2>
+          <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">Select Withdrawal Method</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {withdrawalMethods.map((method) => {
                 const Icon = method.icon;
@@ -95,13 +94,13 @@ const Withdrawal = () => {
                     onClick={() => setSelectedMethod(method.id)}
                     className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                       selectedMethod === method.id
-                        ? 'border-red-500 bg-red-50'
+                        ? 'border-red-500 bg-red-50/80'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
                     <div className="flex items-center space-x-3 mb-3">
                       <Icon size={24} className={selectedMethod === method.id ? 'text-red-600' : 'text-gray-600'} />
-                      <h3 className="font-medium text-gray-900">{method.name}</h3>
+                      <h3 className="font-medium text-gray-800">{method.name}</h3>
                     </div>
                     <p className="text-sm text-gray-600 mb-2">{method.description}</p>
                     <div className="flex justify-between text-xs text-gray-500">
@@ -115,14 +114,14 @@ const Withdrawal = () => {
           </div>
 
           {/* Withdrawal Form */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Withdrawal Details</h2>
+          <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">Withdrawal Details</h2>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Select Account
                 </label>
-                <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-white/80">
                   <option>MT5: 303419 - DIVYESH Katariya ($0.00)</option>
                   <option>MT5: 408312 - DIVYESH Katariya ($0.00)</option>
                 </select>
@@ -137,7 +136,7 @@ const Withdrawal = () => {
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   placeholder="Enter amount"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-white/80"
                 />
                 <div className="flex justify-between text-xs text-gray-500 mt-1">
                   <span>Min: $10</span>
@@ -154,7 +153,7 @@ const Withdrawal = () => {
                     <input
                       type="text"
                       placeholder="Enter bank name"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-white/80"
                     />
                   </div>
                   <div>
@@ -164,7 +163,7 @@ const Withdrawal = () => {
                     <input
                       type="text"
                       placeholder="Enter account number"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-white/80"
                     />
                   </div>
                   <div>
@@ -174,7 +173,7 @@ const Withdrawal = () => {
                     <input
                       type="text"
                       placeholder="Enter SWIFT/IBAN code"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-white/80"
                     />
                   </div>
                 </div>
@@ -193,8 +192,8 @@ const Withdrawal = () => {
         {/* Sidebar Info */}
         <div className="space-y-6">
           {/* Available Balance */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Available Balance</h3>
+          <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Available Balance</h3>
             <div className="space-y-3">
               <div className="flex justify-between">
                 <span className="text-gray-600">MT5: 303419</span>
@@ -213,7 +212,7 @@ const Withdrawal = () => {
           </div>
 
           {/* Withdrawal Limits */}
-          <div className="bg-red-50 rounded-xl p-6">
+          <div className="bg-red-50/80 backdrop-blur-md rounded-xl p-6 border border-white/50">
             <div className="flex items-center space-x-2 mb-3">
               <Info size={20} className="text-red-600" />
               <h3 className="font-semibold text-red-900">Withdrawal Limits</h3>
@@ -227,8 +226,8 @@ const Withdrawal = () => {
           </div>
 
           {/* Pending Withdrawals */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Pending Withdrawals</h3>
+          <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Pending Withdrawals</h3>
             <div className="text-center py-8">
               <Clock size={32} className="mx-auto text-gray-400 mb-2" />
               <p className="text-gray-500">No pending withdrawals</p>

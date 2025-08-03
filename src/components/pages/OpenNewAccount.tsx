@@ -9,12 +9,23 @@ import {
   Star
 } from 'lucide-react';
 
-const OpenNewAccount = () => {
+interface AccountType {
+  id: string;
+  name: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  minDeposit: string;
+  spread: string;
+  commission: string;
+  features: string[];
+  popular: boolean;
+}
+
+const OpenNewAccount: React.FC = () => {
   const [selectedAccountType, setSelectedAccountType] = useState('');
   const [leverage, setLeverage] = useState('500');
   const [currency, setCurrency] = useState('USD');
 
-  const accountTypes = [
+  const accountTypes: AccountType[] = [
     {
       id: 'standard',
       name: 'Standard Account',
@@ -70,7 +81,7 @@ const OpenNewAccount = () => {
           <UserPlus size={20} className="text-green-600" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Open New Account</h1>
+          <h1 className="text-3xl font-bold text-gray-800">Open New Account</h1>
           <p className="text-gray-600">Create a new trading account to start your journey</p>
         </div>
       </div>
@@ -79,8 +90,8 @@ const OpenNewAccount = () => {
         {/* Account Selection */}
         <div className="lg:col-span-2 space-y-6">
           {/* Account Types */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Choose Account Type</h2>
+          <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">Choose Account Type</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {accountTypes.map((account) => {
                 const Icon = account.icon;
@@ -90,7 +101,7 @@ const OpenNewAccount = () => {
                     onClick={() => setSelectedAccountType(account.id)}
                     className={`relative p-6 rounded-lg border-2 cursor-pointer transition-all ${
                       selectedAccountType === account.id
-                        ? 'border-green-500 bg-green-50'
+                        ? 'border-green-500 bg-green-50/80'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
@@ -104,7 +115,7 @@ const OpenNewAccount = () => {
                     
                     <div className="text-center mb-4">
                       <Icon size={32} className={selectedAccountType === account.id ? 'text-green-600' : 'text-gray-600'} />
-                      <h3 className="font-semibold text-gray-900 mt-2">{account.name}</h3>
+                      <h3 className="font-semibold text-gray-800 mt-2">{account.name}</h3>
                     </div>
 
                     <div className="space-y-2 text-sm">
@@ -140,8 +151,8 @@ const OpenNewAccount = () => {
 
           {/* Account Configuration */}
           {selectedAccountType && (
-            <div className="bg-white rounded-xl shadow-sm p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Account Configuration</h2>
+            <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
+              <h2 className="text-lg font-semibold text-gray-800 mb-4">Account Configuration</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -151,7 +162,7 @@ const OpenNewAccount = () => {
                   <select 
                     value={currency}
                     onChange={(e) => setCurrency(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-white/80"
                   >
                     {currencyOptions.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -168,7 +179,7 @@ const OpenNewAccount = () => {
                   <select 
                     value={leverage}
                     onChange={(e) => setLeverage(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-white/80"
                   >
                     {leverageOptions.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -185,7 +196,7 @@ const OpenNewAccount = () => {
                   <input
                     type="password"
                     placeholder="Enter trading password"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-white/80"
                   />
                   <p className="text-xs text-gray-500 mt-1">
                     Password must be at least 8 characters with numbers and letters
@@ -193,7 +204,7 @@ const OpenNewAccount = () => {
                 </div>
               </div>
 
-              <div className="mt-6 p-4 bg-yellow-50 rounded-lg">
+              <div className="mt-6 p-4 bg-yellow-50/80 backdrop-blur-md rounded-lg border border-white/50">
                 <div className="flex items-start space-x-2">
                   <Info size={16} className="text-yellow-600 mt-0.5" />
                   <div className="text-sm text-yellow-800">
@@ -213,10 +224,10 @@ const OpenNewAccount = () => {
         {/* Sidebar Info */}
         <div className="space-y-6">
           {/* Account Benefits */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
             <div className="flex items-center space-x-2 mb-4">
               <Shield size={20} className="text-blue-600" />
-              <h3 className="text-lg font-semibold text-gray-900">Why Choose ZForex?</h3>
+              <h3 className="text-lg font-semibold text-gray-800">Why Choose ZForex?</h3>
             </div>
             <ul className="space-y-3 text-sm text-gray-600">
               <li className="flex items-center space-x-2">
@@ -243,32 +254,32 @@ const OpenNewAccount = () => {
           </div>
 
           {/* Current Accounts */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Your Current Accounts</h3>
+          <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Your Current Accounts</h3>
             <div className="space-y-3">
-              <div className="p-3 bg-gray-50 rounded-lg">
+              <div className="p-3 bg-gray-50/80 rounded-lg">
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="font-medium text-gray-900">MT5: 303419</p>
+                    <p className="font-medium text-gray-800">MT5: 303419</p>
                     <p className="text-sm text-gray-600">ECN Account</p>
                   </div>
-                  <span className="text-sm font-medium text-gray-900">$0.00</span>
+                  <span className="text-sm font-medium text-gray-800">$0.00</span>
                 </div>
               </div>
-              <div className="p-3 bg-gray-50 rounded-lg">
+              <div className="p-3 bg-gray-50/80 rounded-lg">
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="font-medium text-gray-900">MT5: 408312</p>
+                    <p className="font-medium text-gray-800">MT5: 408312</p>
                     <p className="text-sm text-gray-600">ECN Account</p>
                   </div>
-                  <span className="text-sm font-medium text-gray-900">$0.00</span>
+                  <span className="text-sm font-medium text-gray-800">$0.00</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Support */}
-          <div className="bg-blue-50 rounded-xl p-6">
+          <div className="bg-blue-50/80 backdrop-blur-md rounded-xl p-6 border border-white/50">
             <h3 className="font-semibold text-blue-900 mb-2">Need Help?</h3>
             <p className="text-sm text-blue-800 mb-4">
               Our support team is available 24/5 to assist you with account opening.

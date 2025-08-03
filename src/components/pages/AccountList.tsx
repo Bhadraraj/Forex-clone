@@ -13,11 +13,29 @@ import {
   BarChart3
 } from 'lucide-react';
 
-const AccountList = () => {
+interface Account {
+  id: string;
+  name: string;
+  type: string;
+  server: string;
+  balance: number;
+  equity: number;
+  margin: number;
+  freeMargin: number;
+  marginLevel: number;
+  pnl: number;
+  leverage: string;
+  currency: string;
+  status: 'active' | 'inactive' | 'suspended';
+  created: string;
+  lastLogin: string;
+}
+
+const AccountList: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
 
-  const accounts = [
+  const accounts: Account[] = [
     {
       id: '303419',
       name: 'DIVYESH Katariya',
@@ -54,7 +72,7 @@ const AccountList = () => {
     }
   ];
 
-  const getStatusBadge = (status) => {
+  const getStatusBadge = (status: string) => {
     const statusStyles = {
       active: 'bg-green-100 text-green-800',
       inactive: 'bg-gray-100 text-gray-800',
@@ -62,7 +80,7 @@ const AccountList = () => {
     };
 
     return (
-      <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusStyles[status]}`}>
+      <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusStyles[status as keyof typeof statusStyles]}`}>
         {status.charAt(0).toUpperCase() + status.slice(1)}
       </span>
     );
@@ -83,7 +101,7 @@ const AccountList = () => {
             <Users size={20} className="text-blue-600" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Account List</h1>
+            <h1 className="text-3xl font-bold text-gray-800">Account List</h1>
             <p className="text-gray-600">Manage all your trading accounts</p>
           </div>
         </div>
@@ -95,16 +113,16 @@ const AccountList = () => {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-medium text-gray-600">Total Accounts</h3>
             <Users size={16} className="text-blue-600" />
           </div>
-          <p className="text-2xl font-bold text-gray-900">2</p>
+          <p className="text-2xl font-bold text-gray-800">2</p>
           <p className="text-xs text-green-600">All active</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-medium text-gray-600">Total Balance</h3>
             <BarChart3 size={16} className="text-green-600" />
@@ -113,7 +131,7 @@ const AccountList = () => {
           <p className="text-xs text-gray-500">Across all accounts</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-medium text-gray-600">Total Equity</h3>
             <TrendingUp size={16} className="text-blue-600" />
@@ -122,7 +140,7 @@ const AccountList = () => {
           <p className="text-xs text-gray-500">Current market value</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-medium text-gray-600">Total P&L</h3>
             <TrendingDown size={16} className="text-gray-600" />
@@ -133,7 +151,7 @@ const AccountList = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl shadow-sm p-6">
+      <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
           <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
             {/* Status Filter */}
@@ -142,7 +160,7 @@ const AccountList = () => {
               <select 
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80"
               >
                 <option value="all">All Status</option>
                 <option value="active">Active</option>
@@ -160,23 +178,23 @@ const AccountList = () => {
               placeholder="Search accounts..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80"
             />
           </div>
         </div>
       </div>
 
       {/* Accounts Table */}
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm overflow-hidden border border-white/50">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">
+          <h2 className="text-lg font-semibold text-gray-800">
             Trading Accounts ({filteredAccounts.length})
           </h2>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50">
+            <thead className="bg-gray-50/80">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Account
@@ -201,9 +219,9 @@ const AccountList = () => {
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white/60 divide-y divide-gray-200">
               {filteredAccounts.map((account) => (
-                <tr key={account.id} className="hover:bg-gray-50">
+                <tr key={account.id} className="hover:bg-gray-50/50">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div>
                       <div className="flex items-center space-x-3">
@@ -211,7 +229,7 @@ const AccountList = () => {
                           <BarChart3 size={16} className="text-blue-600" />
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-900">MT5: {account.id}</p>
+                          <p className="text-sm font-medium text-gray-800">MT5: {account.id}</p>
                           <p className="text-xs text-gray-500">{account.name}</p>
                         </div>
                       </div>
@@ -222,17 +240,17 @@ const AccountList = () => {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">
+                    <div className="text-sm font-medium text-gray-800">
                       ${account.balance.toFixed(2)}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">
+                    <div className="text-sm font-medium text-gray-800">
                       ${account.equity.toFixed(2)}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">
+                    <div className="text-sm text-gray-800">
                       ${account.margin.toFixed(2)}
                     </div>
                     <div className="text-xs text-gray-500">

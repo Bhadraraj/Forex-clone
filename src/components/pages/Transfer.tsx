@@ -6,7 +6,7 @@ import {
   CheckCircle
 } from 'lucide-react';
 
-const Transfer = () => {
+const Transfer: React.FC = () => {
   const [fromAccount, setFromAccount] = useState('');
   const [toAccount, setToAccount] = useState('');
   const [amount, setAmount] = useState('');
@@ -30,7 +30,7 @@ const Transfer = () => {
           <ArrowLeftRight size={20} className="text-blue-600" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Transfer Funds</h1>
+          <h1 className="text-3xl font-bold text-gray-800">Transfer Funds</h1>
           <p className="text-gray-600">Transfer money between your trading accounts</p>
         </div>
       </div>
@@ -38,8 +38,8 @@ const Transfer = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Transfer Form */}
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-6">Internal Transfer</h2>
+          <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
+            <h2 className="text-lg font-semibold text-gray-800 mb-6">Internal Transfer</h2>
             
             <div className="space-y-6">
               {/* From Account */}
@@ -50,7 +50,7 @@ const Transfer = () => {
                 <select 
                   value={fromAccount}
                   onChange={(e) => setFromAccount(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80"
                 >
                   <option value="">Select source account</option>
                   {accounts.map((account) => (
@@ -80,7 +80,7 @@ const Transfer = () => {
                 <select 
                   value={toAccount}
                   onChange={(e) => setToAccount(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80"
                 >
                   <option value="">Select destination account</option>
                   {accounts.filter(account => account.id !== fromAccount).map((account) => (
@@ -101,7 +101,7 @@ const Transfer = () => {
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   placeholder="Enter amount to transfer"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80"
                 />
                 <div className="flex justify-between text-xs text-gray-500 mt-1">
                   <span>Min: $1.00</span>
@@ -111,7 +111,7 @@ const Transfer = () => {
 
               {/* Transfer Summary */}
               {fromAccount && toAccount && amount && (
-                <div className="bg-blue-50 rounded-lg p-4">
+                <div className="bg-blue-50/80 backdrop-blur-md rounded-lg p-4 border border-white/50">
                   <h3 className="font-medium text-blue-900 mb-2">Transfer Summary</h3>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
@@ -157,23 +157,23 @@ const Transfer = () => {
         {/* Sidebar Info */}
         <div className="space-y-6">
           {/* Account Balances */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Account Balances</h3>
+          <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Account Balances</h3>
             <div className="space-y-3">
               {accounts.map((account) => (
-                <div key={account.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                <div key={account.id} className="flex justify-between items-center p-3 bg-gray-50/80 rounded-lg">
                   <div>
-                    <p className="font-medium text-gray-900">{account.name.split(' - ')[0]}</p>
+                    <p className="font-medium text-gray-800">{account.name.split(' - ')[0]}</p>
                     <p className="text-sm text-gray-600">{account.name.split(' - ')[1]}</p>
                   </div>
-                  <span className="font-bold text-gray-900">${account.balance}</span>
+                  <span className="font-bold text-gray-800">${account.balance}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Transfer Info */}
-          <div className="bg-green-50 rounded-xl p-6">
+          <div className="bg-green-50/80 backdrop-blur-md rounded-xl p-6 border border-white/50">
             <div className="flex items-center space-x-2 mb-3">
               <CheckCircle size={20} className="text-green-600" />
               <h3 className="font-semibold text-green-900">Transfer Benefits</h3>
@@ -187,8 +187,8 @@ const Transfer = () => {
           </div>
 
           {/* Recent Transfers */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Transfers</h3>
+          <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Recent Transfers</h3>
             <div className="text-center py-8">
               <ArrowLeftRight size={32} className="mx-auto text-gray-400 mb-2" />
               <p className="text-gray-500">No recent transfers</p>

@@ -47,7 +47,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 relative overflow-hidden">
+    <div className="min-h-screen bg-blue-50 relative overflow-hidden">
       <AnimatedBackground />
       <div className="flex relative z-10">
         {/* Sidebar */}

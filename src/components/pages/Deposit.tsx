@@ -12,7 +12,7 @@ import {
   Info
 } from 'lucide-react';
 
-const Deposit = () => {
+const Deposit: React.FC = () => {
   const [selectedMethod, setSelectedMethod] = useState('card');
   const [amount, setAmount] = useState('');
 
@@ -68,7 +68,7 @@ const Deposit = () => {
             <ArrowDownToLine size={20} className="text-green-600" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Deposit Funds</h1>
+            <h1 className="text-3xl font-bold text-gray-800">Deposit Funds</h1>
             <p className="text-gray-600">Add money to your trading account</p>
           </div>
         </div>
@@ -81,8 +81,8 @@ const Deposit = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Deposit Methods */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Select Deposit Method</h2>
+          <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">Select Deposit Method</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {depositMethods.map((method) => {
                 const Icon = method.icon;
@@ -92,13 +92,13 @@ const Deposit = () => {
                     onClick={() => setSelectedMethod(method.id)}
                     className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                       selectedMethod === method.id
-                        ? 'border-blue-500 bg-blue-50'
+                        ? 'border-blue-500 bg-blue-50/80'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
                     <div className="flex items-center space-x-3 mb-3">
                       <Icon size={24} className={selectedMethod === method.id ? 'text-blue-600' : 'text-gray-600'} />
-                      <h3 className="font-medium text-gray-900">{method.name}</h3>
+                      <h3 className="font-medium text-gray-800">{method.name}</h3>
                     </div>
                     <p className="text-sm text-gray-600 mb-2">{method.description}</p>
                     <div className="flex justify-between text-xs text-gray-500">
@@ -112,14 +112,14 @@ const Deposit = () => {
           </div>
 
           {/* Deposit Form */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Deposit Details</h2>
+          <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">Deposit Details</h2>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Select Account
                 </label>
-                <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80">
                   <option>MT5: 303419 - DIVYESH Katariya</option>
                   <option>MT5: 408312 - DIVYESH Katariya</option>
                 </select>
@@ -134,7 +134,7 @@ const Deposit = () => {
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   placeholder="Enter amount"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80"
                 />
                 <div className="flex justify-between text-xs text-gray-500 mt-1">
                   <span>Min: $10</span>
@@ -151,7 +151,7 @@ const Deposit = () => {
                     <input
                       type="text"
                       placeholder="1234 5678 9012 3456"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
@@ -162,7 +162,7 @@ const Deposit = () => {
                       <input
                         type="text"
                         placeholder="MM/YY"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80"
                       />
                     </div>
                     <div>
@@ -172,7 +172,7 @@ const Deposit = () => {
                       <input
                         type="text"
                         placeholder="123"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80"
                       />
                     </div>
                   </div>
@@ -189,8 +189,8 @@ const Deposit = () => {
         {/* Sidebar Info */}
         <div className="space-y-6">
           {/* Account Balance */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Account Balance</h3>
+          <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Account Balance</h3>
             <div className="space-y-3">
               <div className="flex justify-between">
                 <span className="text-gray-600">MT5: 303419</span>
@@ -209,7 +209,7 @@ const Deposit = () => {
           </div>
 
           {/* Important Notes */}
-          <div className="bg-blue-50 rounded-xl p-6">
+          <div className="bg-blue-50/80 backdrop-blur-md rounded-xl p-6 border border-white/50">
             <div className="flex items-center space-x-2 mb-3">
               <Info size={20} className="text-blue-600" />
               <h3 className="font-semibold text-blue-900">Important Notes</h3>
@@ -223,8 +223,8 @@ const Deposit = () => {
           </div>
 
           {/* Recent Deposits */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Deposits</h3>
+          <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Recent Deposits</h3>
             <div className="text-center py-8">
               <Clock size={32} className="mx-auto text-gray-400 mb-2" />
               <p className="text-gray-500">No recent deposits</p>

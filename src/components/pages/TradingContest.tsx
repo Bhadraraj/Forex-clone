@@ -12,10 +12,39 @@ import {
   Target
 } from 'lucide-react';
 
-const TradingContest = () => {
+interface Contest {
+  id: number;
+  name: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  participants: number;
+  prizePool: number;
+  entryFee: number;
+  status: 'active' | 'upcoming';
+  timeLeft?: string;
+  registrationDeadline?: string;
+  prizes?: Prize[];
+}
+
+interface Prize {
+  position: string;
+  amount: number;
+  percentage: number;
+}
+
+interface LeaderboardEntry {
+  rank: number;
+  name: string;
+  profit: number;
+  trades: number;
+  winRate: number;
+}
+
+const TradingContest: React.FC = () => {
   const [activeTab, setActiveTab] = useState('current');
 
-  const currentContests = [
+  const currentContests: Contest[] = [
     {
       id: 1,
       name: 'Monthly Trading Championship',
@@ -53,7 +82,7 @@ const TradingContest = () => {
     }
   ];
 
-  const upcomingContests = [
+  const upcomingContests: Contest[] = [
     {
       id: 3,
       name: 'Forex Masters Tournament',
@@ -68,7 +97,7 @@ const TradingContest = () => {
     }
   ];
 
-  const leaderboard = [
+  const leaderboard: LeaderboardEntry[] = [
     { rank: 1, name: 'TradingPro2024', profit: 15420.50, trades: 156, winRate: 78.2 },
     { rank: 2, name: 'ForexMaster', profit: 12890.25, trades: 134, winRate: 72.4 },
     { rank: 3, name: 'ScalpingKing', profit: 11250.75, trades: 289, winRate: 65.8 },
@@ -76,7 +105,7 @@ const TradingContest = () => {
     { rank: 5, name: 'MarketWizard', profit: 8960.45, trades: 167, winRate: 69.5 }
   ];
 
-  const getRankIcon = (rank) => {
+  const getRankIcon = (rank: number) => {
     switch (rank) {
       case 1:
         return <Trophy size={20} className="text-yellow-500" />;
@@ -97,23 +126,23 @@ const TradingContest = () => {
           <Trophy size={20} className="text-yellow-600" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Trading Contest</h1>
+          <h1 className="text-3xl font-bold text-gray-800">Trading Contest</h1>
           <p className="text-gray-600">Compete with traders worldwide and win amazing prizes</p>
         </div>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-medium text-gray-600">Active Contests</h3>
             <Trophy size={16} className="text-yellow-600" />
           </div>
-          <p className="text-2xl font-bold text-gray-900">2</p>
+          <p className="text-2xl font-bold text-gray-800">2</p>
           <p className="text-xs text-green-600">Join now</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-medium text-gray-600">Total Prize Pool</h3>
             <DollarSign size={16} className="text-green-600" />
@@ -122,7 +151,7 @@ const TradingContest = () => {
           <p className="text-xs text-gray-500">This month</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-medium text-gray-600">Participants</h3>
             <Users size={16} className="text-blue-600" />
@@ -131,7 +160,7 @@ const TradingContest = () => {
           <p className="text-xs text-gray-500">Active traders</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-6 border border-white/50">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-medium text-gray-600">Your Rank</h3>
             <Star size={16} className="text-purple-600" />
@@ -142,7 +171,7 @@ const TradingContest = () => {
       </div>
 
       {/* Tabs */}
-      <div className="bg-white rounded-xl shadow-sm">
+      <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm border border-white/50">
         <div className="border-b border-gray-200">
           <nav className="flex space-x-8 px-6">
             <button
@@ -182,12 +211,12 @@ const TradingContest = () => {
           {activeTab === 'current' && (
             <div className="space-y-6">
               {currentContests.map((contest) => (
-                <div key={contest.id} className="border border-gray-200 rounded-lg p-6">
+                <div key={contest.id} className="border border-gray-200 rounded-lg p-6 bg-white/60">
                   <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-2">
                         <Trophy size={24} className="text-yellow-500" />
-                        <h3 className="text-xl font-bold text-gray-900">{contest.name}</h3>
+                        <h3 className="text-xl font-bold text-gray-800">{contest.name}</h3>
                         <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
                           Active
                         </span>
@@ -239,18 +268,20 @@ const TradingContest = () => {
                   </div>
 
                   {/* Prize Distribution */}
-                  <div className="mt-6 pt-6 border-t border-gray-200">
-                    <h4 className="font-medium text-gray-900 mb-3">Prize Distribution</h4>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      {contest.prizes.map((prize, index) => (
-                        <div key={index} className="text-center p-3 bg-gray-50 rounded-lg">
-                          <p className="text-sm font-medium text-gray-900">{prize.position}</p>
-                          <p className="text-lg font-bold text-green-600">${prize.amount.toLocaleString()}</p>
-                          <p className="text-xs text-gray-500">{prize.percentage}% of pool</p>
-                        </div>
-                      ))}
+                  {contest.prizes && (
+                    <div className="mt-6 pt-6 border-t border-gray-200">
+                      <h4 className="font-medium text-gray-800 mb-3">Prize Distribution</h4>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {contest.prizes.map((prize, index) => (
+                          <div key={index} className="text-center p-3 bg-gray-50/80 rounded-lg">
+                            <p className="text-sm font-medium text-gray-800">{prize.position}</p>
+                            <p className="text-lg font-bold text-green-600">${prize.amount.toLocaleString()}</p>
+                            <p className="text-xs text-gray-500">{prize.percentage}% of pool</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -259,12 +290,12 @@ const TradingContest = () => {
           {activeTab === 'upcoming' && (
             <div className="space-y-6">
               {upcomingContests.map((contest) => (
-                <div key={contest.id} className="border border-gray-200 rounded-lg p-6">
+                <div key={contest.id} className="border border-gray-200 rounded-lg p-6 bg-white/60">
                   <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-2">
                         <Gift size={24} className="text-purple-500" />
-                        <h3 className="text-xl font-bold text-gray-900">{contest.name}</h3>
+                        <h3 className="text-xl font-bold text-gray-800">{contest.name}</h3>
                         <span className="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">
                           Upcoming
                         </span>
@@ -313,7 +344,7 @@ const TradingContest = () => {
           {activeTab === 'leaderboard' && (
             <div>
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-gray-900">Monthly Championship Leaderboard</h3>
+                <h3 className="text-lg font-semibold text-gray-800">Monthly Championship Leaderboard</h3>
                 <div className="flex items-center space-x-2 text-sm text-gray-500">
                   <Clock size={16} />
                   <span>Updated 5 minutes ago</span>
@@ -322,7 +353,7 @@ const TradingContest = () => {
 
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-50">
+                  <thead className="bg-gray-50/80">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Rank
@@ -341,13 +372,13 @@ const TradingContest = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-white/60 divide-y divide-gray-200">
                     {leaderboard.map((trader) => (
-                      <tr key={trader.rank} className="hover:bg-gray-50">
+                      <tr key={trader.rank} className="hover:bg-gray-50/50">
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center space-x-2">
                             {getRankIcon(trader.rank)}
-                            <span className="font-medium text-gray-900">#{trader.rank}</span>
+                            <span className="font-medium text-gray-800">#{trader.rank}</span>
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -357,7 +388,7 @@ const TradingContest = () => {
                                 {trader.name.charAt(0)}
                               </span>
                             </div>
-                            <span className="font-medium text-gray-900">{trader.name}</span>
+                            <span className="font-medium text-gray-800">{trader.name}</span>
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -365,11 +396,11 @@ const TradingContest = () => {
                             +${trader.profit.toLocaleString()}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                           {trader.trades}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="text-sm font-medium text-gray-900">{trader.winRate}%</span>
+                          <span className="text-sm font-medium text-gray-800">{trader.winRate}%</span>
                         </td>
                       </tr>
                     ))}

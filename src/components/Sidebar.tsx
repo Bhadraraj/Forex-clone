@@ -54,20 +54,20 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, activeItem, setActiv
       {/* Mobile Overlay */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden"
           onClick={onClose}
         />
       )}
       
       {/* Sidebar */}
       <div className={`
-        fixed left-0 top-0 h-full w-64 bg-white/10 backdrop-blur-md border-r border-white/20 z-50 transform transition-transform duration-300 ease-in-out
+        fixed left-0 top-0 h-full w-64 bg-white/90 backdrop-blur-md border-r border-gray-200/50 z-50 transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         lg:translate-x-0 lg:static lg:z-auto
       `}>
         {/* Mobile Close Button */}
         <div className="lg:hidden flex justify-end p-4">
-          <button onClick={onClose} className="text-white hover:text-gray-300 transition-colors">
+          <button onClick={onClose} className="text-gray-600 hover:text-gray-800 transition-colors">
             <X size={24} />
           </button>
         </div>
@@ -85,18 +85,18 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, activeItem, setActiv
                 className={`
                   w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 mb-1 group
                   ${isActive 
-                    ? 'bg-gradient-to-r from-blue-500/20 to-purple-600/20 text-white border border-blue-500/30 shadow-lg backdrop-blur-sm' 
-                    : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                    ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg' 
+                    : 'text-gray-600 hover:bg-gray-100/50 hover:text-gray-800'
                   }
                 `}
               >
                 <Icon 
                   size={18} 
-                  className={`${isActive ? 'text-blue-400' : 'text-gray-400 group-hover:text-white'} transition-colors`} 
+                  className={`${isActive ? 'text-white' : 'text-gray-500 group-hover:text-gray-700'} transition-colors`} 
                 />
                 <span className="text-sm font-medium">{item.label}</span>
                 {isActive && (
-                  <div className="ml-auto w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <div className="ml-auto w-2 h-2 bg-white rounded-full"></div>
                 )}
               </button>
             );
